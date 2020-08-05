@@ -8,9 +8,9 @@ import { INTERNAL_SERVER_ERROR } from 'http-status-codes'; // 500
 import createError from 'http-errors';
 import cors from 'cors';
 import path from 'path';
-// import fs from 'fs-extra';
+import fs from 'fs-extra';
 import multiparty from 'multiparty'; //处理文件上传
-
+const PUBLIC_PATH = path.resolve(__dirname, 'public');
 let app = express();
 app.use(logger('dev'));
 app.use(express.json());
@@ -25,11 +25,17 @@ app.post('/upload', async function (req: Request, res: Response, next: NextFunct
         if(error) {
             return next(error);
         }
-        console.log('fields', fields);
-        console.log('files', files);
+        let filename = fields.filename[0];
+        let chunk = files.chunk[0];
+        await fs.move(chunk.path, path.resolve(PUBLIC_PATH, filename), {
+            overwrite: true
+        });
         res.json({
             success: true,
-            data: {}
+            data: {
+                filename,
+                chunk
+            }
         });
     });
 });
@@ -60,6 +66,13 @@ app.use(function (error: any, _req: Request, res: Response, _next: NextFunction)
         error
     });
 });
+
+/**
+ * 1.跨域传cookie Access-Control-Allow-Origin不能为* xhr.withCredential:include all:true
+ * 2.传来的肯定是流
+ * const ws = fs.createWriteStream('xxx');
+ * req.pipe(ws);
+ */
 
 export default app;
 
