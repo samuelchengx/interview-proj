@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            text-align: center;
+        }
+        #content {
+            position: relative;
+            width: 640px;
+            height: 380px;
+            margin: auto;
+        }
+        #content canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+        }
+        input {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>视频播放器</h1>
+        <div id="content">
+            <canvas id="canvas"></canvas>
+            <video
+                id="video"
+                controls="controls"
+                autoplay="autoplay"
+                src="./ttt.mp4"
+                width="640"
+                height="380"
+            ></video>
+        </div>
+        <br/>
+        <input type="text"><button>添加弹幕</button>
+        <input type="color">
+        <input type="range" min="20" max="40">
+    </div>
+
+    <script>
+        let Data = [
+            {
+                value: '我是沙发',
+                speed: 2,
+                time: 0,
+                color: 'red',
+                fontSize: 20,
+            },
+            {
+                value: '我出息了！',
+                speed: 2,
+                time: 1,
+                color: 'red',
+                fontSize: 20,
+            }
+        ];
+
+        let $ = document.querySelector.bind(document);
+        let canvas = $("#canvas");
+        let video = $("#video");
+
+        class CanvasBarrage {
+            constructor(canvas, video, options = {}) {
+                if(!canvas || !video) return;
+                this.canvas = canvas;
+                this.video = video;
+                let defaultOptions = { // 默认选项 放一些弹幕的默认值
+                    fontSize: 20,
+                    color: 'gold',
+                    speed: 2,
+                    opacity: .3,
+                    data: []
+                };
+            }
+        }
+
+        let canvasBarrage = new CanvasBarrage(canvas, video, {
+            Data
+        });
+
+
+    </script>
+</body>
+</html>
