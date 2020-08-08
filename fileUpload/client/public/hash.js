@@ -1,4 +1,4 @@
-self.importScripts('http://cdn.bootcss.com/spark-md5/3.0.0/spark-md5.js')
+self.importScripts('https://cdn.bootcss.com/spark-md5/3.0.0/spark-md5.js')
 self.onmessage = async (event) => {
     let { partList } = event.data;
     const spark = new self.SparkMd5().ArrayBuffer;

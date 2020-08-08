@@ -41,12 +41,12 @@ app.post('/upload', async function (req: Request, res: Response, next: NextFunct
 });
 
 /**
-     fields { filename: [ '家校盒子小程序.png' ] }
+     fields { filename: [ '小程序.png' ] }
      files {
         chunk: [
             {
                 fieldName: 'chunk',
-                originalFilename: '家校盒子小程序.png',
+                originalFilename: '小程序.png',
                 path: '/var/folders/tl/0jkjrsk900v2csc2z_f9ln500000gn/T/5okYHicsEOfsToXsHn_r6BXi.png',
                 headers: [Object],
                 size: 4213647
