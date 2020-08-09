@@ -95,7 +95,7 @@ function  Upload() {
         let requests = createRequests(partList, filename);
         await Promise.all(requests);
         await request({
-            url: "/merge",
+            url: `/merge/${filename}`,
             method: "post",
             headers: {
                 'Content-Type': 'application/json'

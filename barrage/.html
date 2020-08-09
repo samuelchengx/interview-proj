@@ -69,21 +69,6 @@
         let $ = document.querySelector.bind(document);
         let canvas = $("#canvas");
         let video = $("#video");
-        class Barrage {
-            constructor(obj, ctx) {
-                this.value = obj.value; // 弹幕内容
-                this.time = obj.time; // 弹幕时间
-                this.obj = obj;
-                this.ctx = ctx;
-            }
-            init(){
-                this.opacity = this.obj.opacity || this.ctx.opacity;
-                this.color = this.obj.color || this.ctx.color;
-                this.fontSize = this.obj.fontSize || this.ctx.fontSize;
-                // 计算画布宽度，校验是否需要继续绘制
-
-            }
-        }
         class CanvasBarrage {
             constructor(canvas, video, options = {}) {
                 if(!canvas || !video) return;
@@ -98,40 +83,11 @@
                 };
                 // 对象的合并，将属性全部挂载到属性上
                 Object.assign(this, defaultOptions, options);
-                // console.log('this', this);
-                this.context = canvas.getContext('2d');
-                this.canvas.width = video.width;
-                this.canvas.height = video.height;
+                console.log('this', this);
                 // 是否暂停
                 this.isPaused = true; // 默认暂停，不渲染弹幕
-                // 存放所有弹幕 Barrage是创造弹幕的实例的类
-                this.barrages = this.Data.map(obj => new Barrage(obj, this));
-                console.log('---barrages---', this.barrages);
-                // 渲染弹幕
-                this.render();
-            }
-            render(){
-                // 先清空
-                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                // 渲染弹幕
-                this.renderBarrage();
-                if(this.isPaused == false){
-                    requestAnimationFrame(this.render.bind(this));
-                }
-            }
-            renderBarrage(){
-                // 将数组弹幕 取出判断时间和视频的时间是否符合，符合就渲染
-                let time = this.video.currentTime;
-                this.barrages.forEach( barrage =>{
-                    if(time >= barrage.time){
-                        // 初始化,再绘制
-                        // 1.如果没有初始化，先初始化
-                        // 2.
-                        if(barrage.isInited){
-                            barrage.init
-                        }
-                    }
-                });
+                // 存放所有弹幕
+                this.barrages = this.Data.map(obj => new Barrage);
             }
         }
 
