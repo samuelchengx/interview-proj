@@ -29,7 +29,7 @@ export default new Vuex.Store({
   modules: {
     a: {
       state: {
-        count: 200
+        count: 2000
       },
       modules: {
         b: {
