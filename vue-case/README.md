@@ -67,10 +67,17 @@
 
 - `created`
 - `mounted`
+- `服务端不支持mounted`
 
-## 何时需要使用beforeDestroy
+## 10、何时需要使用beforeDestroy
 
 `解除$on 清楚计时器 解除事件绑定`
 
+## 11、Vue模版编译原理
+
+- `将template编译成render函数`
+`将模版转成ast树，静态节点标记优化树，将ast树生成代码，用with执行`
+
+## 12、Vue中v-if和v-show的区别
 
 
