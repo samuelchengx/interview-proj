@@ -48,8 +48,9 @@ let Parent = function () {
     return Parent;
 }();
 
+export default Parent;
+
 
 let parent = new Parent('samuelcheng', 29);
 console.log('-----parent-----', parent);
-
 parent.speakSomething();
