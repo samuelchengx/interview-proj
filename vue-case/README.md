@@ -76,8 +76,45 @@
 ## 11、Vue模版编译原理
 
 - `将template编译成render函数`
-`将模版转成ast树，静态节点标记优化树，将ast树生成代码，用with执行`
+`将模版转成ast树，静态节点标记优化树，将ast树生成代码，用with包装，
+new Function(字符串模版)，这就是模版引擎实现的原理`
 
 ## 12、Vue中v-if和v-show的区别
+
+- `v-if vue-template-compiler => ast => _c _e _l判断 with render`
+
+- `v-show render函数，标记为show指令，接受参数设置为show或是hide`
+
+## 13、Vue中v-for和v-if为什么不同时使用
+
+- `v-for 优先级高于 v-if 同一标签最好不同时用，vue编译角度看，造成性能降低，推荐通过外层dom包裹使用`
+
+## 14、用vnode来描述一个DOM结构
+
+- `会将template => ast树 => code generate => render函数 内部调用的就是_c方法 vnode return {tag, data, key, children, text} => 虚拟dom`
+
+## 15、diff算法的时间复杂度
+
+- `两个树的完全的diff算法是一个时间复杂度为O(n^3),Vue进行了优化O(n^3)转化成O(n)复杂度的问题(只比较同级不考虑跨级问题)在前端之中，很少会跨越层级移动DOM，所以DOM只会对一个层级元素进行对比`
+
+## 16、简述Vue的diff算法原理
+
+- `1、先比较同级，再比较子节点`
+- `2、先判断一方有子节点，一方没子节点的情况`
+- `3、比较都有子节点的情况`
+- `4、递归比较子节点`
+
+## 17、v-for中为什么要用key
+
+- ``
+
+## 18、描述组件渲染和更新过程
+
+- `理解:`
+
+- `渲染组件时，会通过Vue.extend 方法构建子组件的构造函数，并进行实例化。最终手动调用$mount()进行挂载。更新组件时会进行patchVNode流程，核心算法就是diff算法`
+
+## 19、组件中的函数为什么一个函数
+
 
 
