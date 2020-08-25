@@ -1,7 +1,7 @@
 function _LazyMan(name) {
     this.name = name;
     this.promises = [];
-    var mfunc = () =>{
+    var mfunc = () => {
         console.log(`hello this is ${this.name}`);
         var p = Promise.resolve();
         return p

@@ -9,13 +9,11 @@
 ## 设计模式 vue中使用了几种设计模式
 
 ## 数组去重 
-
 ` 
     function unique(arr){
        return Arrar.from(new Set(arr));
     } 
 `
-
 `
     function unique(arr) {
         for(var i = 0; i < arr.length; i++) {
@@ -39,6 +37,8 @@
 ## promise
   
 ## Lazyman
+
+`done`
 
 ## eventEmitter
 
