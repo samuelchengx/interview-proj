@@ -44,7 +44,12 @@
 
 ## http2
 
+`http2新特性 https://www.jianshu.com/p/67c541a421f9`
+
+
 ## 浏览器多线程
 
 ## common.js es6
+
+`commonjs规范 https://www.jianshu.com/p/dd08f4095a49`
 

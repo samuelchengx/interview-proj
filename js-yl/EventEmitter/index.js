@@ -34,7 +34,7 @@ class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
 
 let fn = () => {
-    console.log('an samuel event occurred!');
+    console.log('an samuel event done!');
 }
 
 myEmitter.on('samuel', fn);
