@@ -52,4 +52,5 @@
 ## common.js es6
 
 `commonjs规范 https://www.jianshu.com/p/dd08f4095a49`
+`阮一峰 https://javascript.ruanyifeng.com/nodejs/module.html`
 
