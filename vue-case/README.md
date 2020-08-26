@@ -1,20 +1,17 @@
 
 ## 1、谈谈你对MVVM的理解;
-
 - `page视图(view) <===>  路由、控制器(Controller) <===> 数据(Model)`
 - `||`
 - `||`
 - `DOM <===> ViewModel(JS Data Binding) <===> Model(数据)`
 
 ## 2、请谈一下响应式数据原理
-
 - `Object.defineProperty`
 - `vue初始化时，data里面的所有属性添加新的属性，当页面取值的时候，就会收集依赖(添加到watcher当中)，属性发生变化就会更新操作。`
 - `原理:`
 ` initData() => new Observe() => this.walk() => defineReactive => Object.defineProperty => get dep.depend => set notify`
 
 ## 3、vue是如何检测数组变化的
-
 - `使用函数劫持,重写数组方法 push pop shift unshift splice sort reserve`
 - `vue将data中的数组，进行了原型链重写，指向了自己定义的方法，
 这样当调用数组api时，可以通知搜集依赖，如果数组里还包含引用类型，
@@ -25,7 +22,6 @@
 ` initData => new Observe => protoArgument(value, arrMethods) => ObserveArray`
 
 ## 4、为何vue采用异步渲染?
-
 - `理解: vue组件级更新 频繁操作数据，导致性能降低，采用异步渲染`
 - `如果不采用异步渲染，每次更新数据都会对当前组件进行渲染，vue在数据更新后，再去更改视图`
 - `原理:`
@@ -40,7 +36,6 @@
 - `nextTick(cb) => callbacks.push(cb) => timerFunc调用就是flushCallback[采用promise/MutationObserve/setImmedate/setTimeout][] => 返回promise`
 
 ## 6、Vue中computed的特点
-
 - `理解: computed[dirty实现了缓存] watch method之间的区别`
 - `默认computed也是一个watcher是具备缓存的，只有依赖的属性发生改变，才会改变视图`
 
