@@ -38,13 +38,13 @@ class Clock extends React.Component {
         this.setState( prevState=> ({
             number: prevState.number + 1
         }), ()=>{
-           // console.log('--1--', this.state.number); // 2
+           console.log('--1--', this.state.number); // 2
         });
         console.log('--12--', this.state.number); // 0
         this.setState( prevState=> ({
             number: prevState.number + 1
         }), ()=>{
-            // console.log('--21--', this.state.number); // 2
+            console.log('--21--', this.state.number); // 2
         });
         console.log('--22--', this.state.number); // 0
     }

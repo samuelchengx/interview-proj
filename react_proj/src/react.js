@@ -25,13 +25,19 @@ export class Component {
     constructor(props) {
         this.props = props;
         this.updateQueue = []; // 存放临时更新队列
+        this.callbackQueue = [];
         this.isBatchingUpdate = false; // 是否处理批量更新
     }
-    setState(partialState){
+    setState(partialState, cb){
         this.updateQueue.push(partialState);
+        this.callbackQueue.push(cb);
         if(!this.isBatchingUpdate) {
             this.forceUpdate();
         }
+    }
+    flushCallback(){
+        this.callbackQueue.forEach(fn => fn());
+        this.callbackQueue = [];
     }
     forceUpdate() {
         // accumulate累计状态 || current当前状态 || this.state是初始值
@@ -43,6 +49,7 @@ export class Component {
         // 清空更新队列
         this.updateQueue.length = 0;
         updateComponent(this);
+        this.flushCallback();
     }
 }
 export default {
