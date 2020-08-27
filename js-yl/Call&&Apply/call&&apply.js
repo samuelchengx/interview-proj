@@ -20,7 +20,7 @@ Function.prototype.call = function (context) {
     for (let i = 1; i < arguments.length; i++) {
         args.push(`arguments[${i}]`);
     }
-    console.log('---', context);
+    console.log('---', `context.fn(${args})`);
     // 数组的toString的特性
     let r = eval(`context.fn(${args})`);
     delete context.fn;
@@ -39,7 +39,7 @@ Function.prototype.apply = function (context, args) {
     return r;
 }
 
-// fn1.call('hello', 1, 2, 3);
+fn1.call('hello', 1, 2, 3);
 // 如果多个call会让call方法执行 并且把call中的this变成fn2
 // fn1.call.call(fn2); // => 2
 // fn1.apply('hello', [1,2,3,4]);
