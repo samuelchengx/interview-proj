@@ -93,7 +93,29 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("\nmodule.exports = 'samuel';\n\n\n\n//# sourceURL=webpack:///./src/a.js?");
+eval("module.exports = 'samuel';\n\n//# sourceURL=webpack:///./src/a.js?");
+
+/***/ }),
+
+/***/ "./src/css/b.less":
+/*!************************!*\
+  !*** ./src/css/b.less ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./src/css/b.less?");
+
+/***/ }),
+
+/***/ "./src/css/index.css":
+/*!***************************!*\
+  !*** ./src/css/index.css ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./src/css/index.css?");
 
 /***/ }),
 
@@ -104,7 +126,7 @@ eval("\nmodule.exports = 'samuel';\n\n\n\n//# sourceURL=webpack:///./src/a.js?")
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("let str = __webpack_require__(/*! ./a.js */ \"./src/a.js\");\n\nconsole.log('---str---', str);\n\n\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("var _class, _class2, _temp;\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\nvar str = __webpack_require__(/*! ./a.js */ \"./src/a.js\");\n\nconsole.log('---str---', str);\n\nvar fn = function fn() {\n  console.log('---p---');\n};\n\nfn();\n\nvar A = log(_class = (_temp = _class2 = /*#__PURE__*/function () {\n  function A(name) {\n    _classCallCheck(this, A);\n\n    this.name = name;\n  }\n\n  _createClass(A, [{\n    key: \"say\",\n    value: function say() {\n      console.log('----say----');\n    }\n  }]);\n\n  return A;\n}(), _defineProperty(_class2, \"test\", 1), _temp)) || _class;\n\nvar aa = new A('samuel');\naa.say();\nconsole.log(aa.name, aa.test);\n\n__webpack_require__(/*! ./css/index.css */ \"./src/css/index.css\");\n\n__webpack_require__(/*! ./css/b.less */ \"./src/css/b.less\");\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
