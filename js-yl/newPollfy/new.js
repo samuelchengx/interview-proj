@@ -1,6 +1,5 @@
 function Animal(type){
     this.type = type;
-
     // 如果构造函数返回的是引用类型,需把此对象返回
     return {
         name: 'Samuel',

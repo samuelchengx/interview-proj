@@ -53,8 +53,163 @@
 `commonjs规范 https://www.jianshu.com/p/dd08f4095a49`
 `阮一峰 https://javascript.ruanyifeng.com/nodejs/module.html`
 
-## bind函数的实现
+## bind函数的实现 var bindFn = fn.bind(context, params);
+
+`
+   Function.prototype.bind = function(context) {
+        var that = this;
+        var bindArgs = Array.prototype.slice.call(arguments, 1);
+        return function () {
+            var args = Array.prototype.slice.call(arguments, 1);
+            return that.apply(context, args.concat(bindArgs));
+        };
+   }
+`
+
+## js基本数据类型 基础类型 
+
+`
+Undefined、Null、Boolean、Number和String
+`
+
+## js数据类型判断 typeof instanceof constructor
+
+`
+    typeof 操作数，具有性就是对象数据类型区分不开。
+    instanceof  两个操作数，返回true/false，表示s是否为类的示例，得到具体类型。
+    constructor 对象属性，不是运算符，constructor指向对象的构造函数。
+`
+
+## js数据类型隐式转化
+
+`
+    [1,2] + [3,4] = '1,23,4'  [] == [] => false  {} + [] = [Object object]
+`
+
+## js变量提升[预编译期间会将变量声明与函数声明提升至其对应作用域的最顶端] 
+
+`
+    var a; // 全局作用域
+    console.log(a); // undefined
+    a = "a";
+    var foo = () => {//函数作用域
+        var a; // 全局变量会被局部作用域中的同名变量覆盖
+        console.log(a); // undefined
+        a = "a1";
+    }
+    foo();
+    console.log(foo1); // [Function: foo1]
+    foo1(); // foo1
+    console.log(foo2); // undefined
+    foo2(); // TypeError: foo2 is not a function
+    function foo1 () {
+        console.log("foo1");
+    };
+    var foo2 = function () {
+        console.log("foo2");
+    };
+    
+    var a = 1;
+    function foo() {
+        a = 10;
+        console.log(a);
+        return;
+        function a() {};
+    }
+    foo();
+    console.log(a);
+    
+    var a = 1; // 定义一个全局变量 a
+    function foo() {
+        // 首先提升函数声明function a () {}到函数作用域顶端， 然后function a () {}等同于 var a =  function() {};最终形式如下
+        var a = function () {}; // 定义局部变量 a 并赋值。
+        a = 10; // 修改局部变量 a 的值，并不会影响全局变量 a
+        console.log(a); // 打印局部变量 a 的值：10
+        return;
+    }
+    foo();
+    console.log(a); // 打印全局变量 a 的值：1
+`
+
+## js变量转化[]
+
+`
+  转换成String [123, true]
+  转换成Number [Number parseInt parseFloat]
+  转换成Boolean [Boolean() null和undefined => false Object => true var a = 'ddd' a= !!a => true ] 
+`
+
+## js变量和赋值引用
+
+`
+ var a = 10;
+ var b = a;
+ b = 20;
+ console.log(b); // 20
+ 
+ var obj1 = {x: 100};
+ var obj2 = obj1;
+ obj1.x = 200;
+ console.log(obj2);
+`
+
+## 执行上下文理解
+
+`
+    function task(m, n) {
+        var a = 1;
+        var b = {
+            name: 'samuel'
+        };
+        var c = [1,2,3];
+    }
+    
+    task(10, 20);
+    
+    // task的执行上下文
+    let taskExecutionContext = {
+        this: window,
+        scopeChain: [],
+        // Variable Object 变量对象 里面存的是当前函数执行所需的变量
+        VO: {
+            // arguments: {},
+            m: 10,
+            n: 20,
+            a: 1,
+            b: 'XO1',
+            c: 'XA1'
+        }
+    }
+`
+
+## 作用域理解 
 
 
+## 作用链理解
+
+## 闭包 优点 缺点
+
+`
+
+`
+
+## 延迟的理解 setTimeout会立即执行吗？
+`
+   js执行栈 stack
+   
+   异步宏任务进入回调队列
+   
+   主线程执行完毕
+   
+   轮询回调队列，根据优先级调用
+   
+`
+## Promise的理解
+
+## 节流是如何处理的
+
+## ES6 7 8
+
+## 
 
 
