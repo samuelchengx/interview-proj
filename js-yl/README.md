@@ -206,11 +206,36 @@ Undefined、Null、Boolean、Number和String
 ## js进阶
 
 ## 0.1 + 0.2 != 0.3
+
+- (0.1*10+0.2*10)/10 ===0.3
+- parseFloat((0.1+0.2).toFixed(10)) ===0.3 toFixed返回的是字符串，需要parseFloat转为浮点型
+
+- 原因? 在某个精度点直接舍弃。当然，代价就是，0.1在计算机内部根本就不是精确的0.1，而是一个有舍入误差的0.1。当代码被编译或解释后，0.1已经被四舍五入成一个与之很接近的计算机内部数字，以至于计算还没开始，一个很小的舍入错误就已经产生了。这也就是 0.1 + 0.2 不等于0.3 的原因。
+
 ## vue生命周期
+
+
 ## vue双向绑定原理
 ## vue指令的用法
 
 ## React 生命周期
+`
+    挂载卸载过程
+    constructor()
+    componentWillMount()
+    componentDidMount()
+    componentWillUnmount ()
+    更新过程
+    componentWillReceiveProps (nextProps)
+    shouldComponentUpdate(nextProps,nextState)
+    componentWillUpdate (nextProps,nextState)
+    componentDidUpdate(prevProps,prevState)
+    render()
+    React新增的生命周期
+    getDerivedStateFromProps(nextProps, prevState)
+    getSnapshotBeforeUpdate(prevProps, prevState)
+`
+
 ## React 高阶函数
 ## React setState同步和异步的区分
 ## React 新特性
