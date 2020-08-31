@@ -163,9 +163,7 @@ Undefined、Null、Boolean、Number和String
         };
         var c = [1,2,3];
     }
-    
     task(10, 20);
-    
     // task的执行上下文
     let taskExecutionContext = {
         this: window,
@@ -184,7 +182,6 @@ Undefined、Null、Boolean、Number和String
 
 ## 作用域理解 
 
-
 ## 作用链理解
 
 ## 闭包 优点 缺点
@@ -192,17 +189,12 @@ Undefined、Null、Boolean、Number和String
 `
 
 `
-
 ## 延迟的理解 setTimeout会立即执行吗？
 `
    js执行栈 stack
-   
    异步宏任务进入回调队列
-   
    主线程执行完毕
-   
    轮询回调队列，根据优先级调用
-   
 `
 ## Promise的理解
 
@@ -210,6 +202,36 @@ Undefined、Null、Boolean、Number和String
 
 ## ES6 7 8
 
-## 
+
+## js进阶
+
+## 0.1 + 0.2 != 0.3
+## vue生命周期
+## vue双向绑定原理
+## vue指令的用法
+
+## React 生命周期
+## React 高阶函数
+## React setState同步和异步的区分
+## React 新特性
+## React fiber的原理
+## React 为什么在新版本去掉了一下生命周期
+## React hook有哪些
+## 新增的生命周期有哪些
+
+## vuex实现原理
+## redux实现原理和状态更新流程
+## mbox实现原理和状态更新流程
+## vuex vs redux vs mbox
+
+## webpack
+- webpack宗旨：一切皆模块；
+- 热更新原理；
+- webpack内部构建流程(读取文件，解析为ast，匹配对应的loader，执行对应的插件，输出结果)；
+- 别的构建工具gulp grunt rollup...。
+
+## js-bridge原理
+
+## 前端工程化
 
 
