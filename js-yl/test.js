@@ -1,5 +1,5 @@
 /**
- *
+ * 实现一个LazyMan流程控制
  * @param name
  * @returns {_LazyMan}
  * @constructor
@@ -78,13 +78,13 @@ Function.prototype.call = function (context) {
     return r;
 }
 // fn1.call('hello1', 1, 2, 3);
-Function.prototype.apply = function (context) {
-    context = context ? Object(context) : window;
-    context.fn = this;
-    var r = eval(`context.fn(${arguments[1]})`);
-    delete context.fn;
-    return r;
-}
+// Function.prototype.apply = function (context) {
+//     context = context ? Object(context) : window;
+//     context.fn = this;
+//     var r = eval(`context.fn(${arguments[1]})`);
+//     delete context.fn;
+//     return r;
+// }
 // fn1.apply('hello2', [1, 2, 3]);
 function fn2(name, age) {
     console.log(this.name, name, age);
@@ -94,6 +94,7 @@ let obj = {
     name: 'gina'
 };
 
+// to do
 Function.prototype.bind = function (context) {
     let that = this;
     var bindArgs = Array.prototype.slice.call(arguments, 1);
@@ -194,20 +195,105 @@ EventEmitter.prototype.emit = function (type, ...data) {
         });
     }
 }
-
 /***************************************** 实现eventEmitter END   ********************************/
 
 /***************************************** 实现数组去重 START     **********************************/
 // es6
 function unique1(arr) {
-    return Array.from(new Set(arr));
+    return [...new Set(arr)];
+    // return Array.from(new Set(arr));
 }
-
+// console.log('---unique1---', unique1([1,1,1,2,3,3,3,4,5,6,6,7,7,7,7,7]));
+// 利用es5 for 数组splice去重
 function unique2(arr) {
+    for(var i = 0; i < arr.length; i++) {
+        for(var j = i+1; j< arr.length; j++){
+            if(arr[i] === arr[j]){
+                arr.splice(j,1);
+                j--;
+            }
+        }
+    }
+    return arr;
+}
+// console.log('---unique2---', unique2([1,1,1,2,3,3,3,4,5,6,6,7,7,7,7,7]));
 
+// 利用indexOf去重
+function unique3(arr) {
+    var temp = [];
+    for(var i = 0; i < arr.length; i++) {
+        if(temp.indexOf(arr[i]) === -1){
+            temp.push(arr[i]);
+        }
+    }
+    return temp;
+}
+// console.log('---unique3---', unique3([1,1,1,2,3,3,3,4,5,6,6,7,7,7,7,7]));
+/***************************************** 实现数组去重 END *********************************/
+
+/**************************** 防抖和节流 START ***********************/
+// 函数防抖（debounce）、函数节流（throttle）
+// debounce: 事件被触发，等待n秒后再执行回调，如果在这n秒内又被触发，则重新计数
+// throttle: 规定在一个单位时间内，只能有一次触发事件的回调函数执行，如果在同一个单位时间内某某被触发多次，则只有一次能生效
+function debounce(fn, wait) {
+    var timer = null;
+    return function () {
+        var context = this;
+        var args = arguments;
+        if(timer) {
+            clearTimeout(timer);
+            timer = null;
+        }
+        // 重新设定定时任务
+        timer = setTimeout(() => {
+            fn.apply(context, args);
+        }, wait);
+    }
 }
 
-/***************************************** 实现数组去重   END      *********************************/
+function fn(){
+    console.log('debounce function doing...');
+}
+
+// setInterval(debounce(fn, 500), 1000);
+// setInterval(debounce(fn, 2000), 1000);
+
+function throttle(fn, gapTime) {
+    var _lastTime;
+    var timer = null;
+    return function () {
+        var _nowTime = new Date().getTime();
+        var context = this;
+        var args = arguments;
+
+        if(!_lastTime) {
+            _lastTime = new Date().getTime();
+            fn.apply(context, args);
+        } else if( _nowTime - _lastTime < gapTime ) {
+            if(timer){
+                clearTimeout(timer);
+                timer = null;
+            }
+            timer = setTimeout(()=> {
+                _lastTime = new Date().getTime();
+                fn.apply(context, args);
+            }, gapTime);
+        } else {
+            _lastTime = new Date().getTime();
+            fn.apply(context, args);
+        }
+    }
+}
+
+
+function throttleHandle(){
+    console.log('throttle function doing...');
+}
+
+// setInterval(throttle(fn, 2000), 10)
+
+/**************************** 防抖和节流 END ***********************/
+
 
 
 
