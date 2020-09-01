@@ -66,17 +66,17 @@ function fn1(){
     console.log(this, arguments);
 }
 
-Function.prototype.call = function (context) {
-    context = context ? Object(context) : window;
-    context.fn = this;
-    var args = [];
-    for(var i = 1; i < arguments.length; i++) {
-        args.push(arguments[i]);
-    }
-    var r = eval(`context.fn(${args})`);
-    delete context.fn;
-    return r;
-}
+// Function.prototype.call = function (context) {
+//     context = context ? Object(context) : window;
+//     context.fn = this;
+//     var args = [];
+//     for(var i = 1; i < arguments.length; i++) {
+//         args.push(arguments[i]);
+//     }
+//     var r = eval(`context.fn(${args})`);
+//     delete context.fn;
+//     return r;
+// }
 // fn1.call('hello1', 1, 2, 3);
 // Function.prototype.apply = function (context) {
 //     context = context ? Object(context) : window;
@@ -296,12 +296,113 @@ function throttleHandle(){
 
 /**************************** 继承 START ***********************/
 
+// 参考链接地址：https://www.jianshu.com/p/85899e287694
+// 1、原型链继承
+// 缺点: 1、引用类型的属性被所有实例共享； 2、创建Child 的实例时， 不能向Person传参。
+function Person() {
+    this.name = 'samuel';
+    this.colors = ['red', 'blue', 'green'];
+}
+Person.prototype.getName = function () {
+    console.log(this.name);
+}
+function Child() {}
+Child.prototype = new Person();
+var child = new Child();
+// child.getName();
+var child1 = new Child();
+var child2 = new Child();
+// child1.colors.push('yellow');
+// console.log(child1.colors);
+// console.log(child2.colors);
+
+// 2.借用构造函数（经典继承）
+// 优点：1.避免了引用类型的属性被所有实例共享; 2.可以在Child中向Parent传参
+// 缺点: 1.只是子类的实例，不是父类的实例; 2.方法都在构造函数中定义，每次创建实例都会创建一遍方法
+
+// function Parent(name) {
+//     this.name = name;
+// }
+// Parent.prototype.sayName = function () {
+//     console.log(this.name);
+// }
+// function Sub(name) {
+//     Parent.call(this, name);
+// }
+// var sub1 = new Sub('samuel');
+// var sub2 = new Sub('gina');
+// console.log(sub1.name);
+// console.log(sub2.name);
+// console.log(sub1 instanceof Sub, sub1 instanceof Parent);
+
+// 3.组合继承
+// 缺点：调用了两次父类构造函数
+// function Parent(name) {
+//     this.name = name;
+//     this.hobby = ['sing', 'dance'];
+// }
+// Parent.prototype.sayName = function () {
+//     console.log(this.name);
+// }
+// function Sub(name, age) {
+//     Parent.call(this, name); // 第二次调用
+//     this.age = age;
+// }
+//
+// Sub.prototype = new Parent(); // 第一次调用
+// var sub1 = new Sub('samuel', 30);
+// var sub2 = new Sub('gina', 29);
+// sub1.sayName();
+// sub2.sayName();
+// console.log(sub1.name);
+// console.log(sub2.name);
+// sub1.hobby.push('smoke');
+// sub2.hobby.push('game');
+// console.log(sub1.hobby);
+// console.log(sub2.hobby);
+
+// 4.原型式继承
+// 缺点： 包含引用类型的属性值始终都会共享相应的值， 这点跟原型链继承一样
+// function CreateObj(o) {
+//     function F() {}
+//     F.prototype = o;
+//     console.log(o.__proto__ === Object.prototype);
+//     console.log(F.prototype.constructor === Object);
+//     return new F();
+// }
+// var p1 = {
+//     name: 'samuelcheng',
+//     friends: ['aa', 'bb']
+// };
+// var sub1 = CreateObj(p1);
+// var sub2 = CreateObj(p1);
+// sub1.name = 'gina';
+// sub1.friends.push('cc');
+// console.log(sub1.name);
+// console.log(sub2.name);
+// sub1.friends = ['xx'];
+// console.log(sub1.friends);
+// console.log(sub2.friends);
+
+// 寄生继承
+// 寄生组合式继承
+
+
 /**************************** 继承 END ***********************/
 
 
 /**************************** 设计模式 START ***********************/
 
 /**************************** 设计模式 END ***********************/
+
+/**************************** 前端经典算法 START ***********************/
+
+/**************************** 前端经典算法 END ***********************/
+
+
+/**************************** 前端常见算法 START ***********************/
+
+/**************************** 前端常见算法 END ***********************/
 
 
 
