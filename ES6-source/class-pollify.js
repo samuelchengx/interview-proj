@@ -27,7 +27,7 @@ var _createClass= function () {
             defineProperties(Constructor.prototype, protoProps);
         }
         if(staticProps) {
-            defineProperties(Constructor, protoProps);
+            defineProperties(Constructor, staticProps);
         }
         return Constructor;
     };

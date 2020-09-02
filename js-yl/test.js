@@ -109,7 +109,6 @@ Function.prototype.bind = function (context) {
 // let bindFn = fn2.bind(obj, 'xxx');
 // bindFn(30);
 
-
 function instance_of(L, R) {
     var O = R.prototype;
     var L = L.__proto__;
@@ -423,6 +422,50 @@ var child2 = new Child();
 /**************************** 前端常见算法 END ***********************/
 
 /**************************** class实现 START ***********************/
+function _classCallCheck(instance, constructor) {
+    if(!(instance instanceof constructor)){
+        return new TypeError('instance is not created by constructor');
+    }
+}
+var _createClass = function (){
+    function defineProperties(target, props) {
+        for(var i = 0; i< props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if('value' in descriptor){
+                descriptor.writable = true;
+            }
+            Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }
+    return function (Constructor, protoProps, staticProps) {
+        if(protoProps) {
+            defineProperties(Constructor.prototype, protoProps);
+        }
+        if(staticProps){
+            defineProperties(Constructor, staticProps);
+        }
+        return Constructor;
+    }
+}();
+var ParentClass = (function(){
+    function Parent(name, age) {
+        _classCallCheck(this, Parent);
+        this.name = name;
+        this.age = age;
+    }
+    _createClass(Parent,[{
+        key: 'say',
+        value: function() {
+            console.log('My name is ' + this.name + ', and I am ' + this.age + ' years old!');
+        }
+    }]);
+    return Parent;
+})();
+
+let person111 = new ParentClass('samuelcheng', 29);
+person111.say();
 
 /**************************** class实现 END ***********************/
 
