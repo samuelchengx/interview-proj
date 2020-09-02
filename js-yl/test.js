@@ -414,14 +414,50 @@ var child2 = new Child();
 /**************************** 设计模式 END ***********************/
 
 /**************************** 前端经典算法 START ***********************/
+// 参考链接地址1: https://www.cnblogs.com/libin-1/p/5998870.html
+// 参考链接地址2: https://zhuanlan.zhihu.com/p/101522204
+
+
+// 字符串中出现次数最多的字符和次数
+// 页面中出现最多次数的标签和次数
+//
 
 /**************************** 前端经典算法 END ***********************/
 
 /**************************** 前端常见算法 START ***********************/
+let arr = [8, 12, 6, 17, 1];
+function swap(arr, i, j) {
+
+}
+
+// 冒泡排序+优化
+Array.prototype.bubble = function () {
+
+}
+
+arr.bubble();
+
+// 插入排序
+Array.prototype.insert = function () {
+
+}
+
+// 快速排序
+Array.prototype.quick = function () {
+
+}
+
+
 
 /**************************** 前端常见算法 END ***********************/
 
 /**************************** class实现 START ***********************/
+// class实现继承的实质是  ===>  Child.__proto__  Parent.prototype;
+// 1、super当做函数使用 super();
+// 2、super 作为对象使用
+    // 2.1、super在普通方法中（即非静态方法）及此时的this关键字指向 ===> super访问父类
+    // 2.2、super在静态方法中及此时的this关键字指向   ===> super访问子类，而不是子实例
+
 function _classCallCheck(instance, constructor) {
     if(!(instance instanceof constructor)){
         return new TypeError('instance is not created by constructor');
@@ -429,7 +465,7 @@ function _classCallCheck(instance, constructor) {
 }
 var _createClass = function (){
     function defineProperties(target, props) {
-        for(var i = 0; i< props.length; i++) {
+        for(var i = 0; i < props.length; i++){
             var descriptor = props[i];
             descriptor.enumerable = descriptor.enumerable || false;
             descriptor.configurable = true;
@@ -440,13 +476,12 @@ var _createClass = function (){
         }
     }
     return function (Constructor, protoProps, staticProps) {
-        if(protoProps) {
+        if(protoProps){
             defineProperties(Constructor.prototype, protoProps);
         }
         if(staticProps){
             defineProperties(Constructor, staticProps);
         }
-        return Constructor;
     }
 }();
 var ParentClass = (function(){
@@ -463,6 +498,7 @@ var ParentClass = (function(){
     }]);
     return Parent;
 })();
+console.log('ParentClass', ParentClass.prototype);
 let person111 = new ParentClass('samuelcheng', 29);
 person111.say();
 /**************************** class实现 END ***********************/
