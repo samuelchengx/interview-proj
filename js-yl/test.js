@@ -463,10 +463,8 @@ var ParentClass = (function(){
     }]);
     return Parent;
 })();
-
 let person111 = new ParentClass('samuelcheng', 29);
 person111.say();
-
 /**************************** class实现 END ***********************/
 
 
