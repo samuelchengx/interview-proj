@@ -28,35 +28,23 @@
     }
 `
 
-`
- function unique(arr) {
-    
- }
-`
-
 ## promise
   
-## Lazyman
+## Lazyman [见test.js源码]
 
 `
 
 `
-
 ## eventEmitter
-
 ## http2
-
 `http2新特性 https://www.jianshu.com/p/67c541a421f9`
-
 ## 浏览器多线程
 
 ## common.js es6
-
 `commonjs规范 https://www.jianshu.com/p/dd08f4095a49`
 `阮一峰 https://javascript.ruanyifeng.com/nodejs/module.html`
 
 ## bind函数的实现 var bindFn = fn.bind(context, params);
-
 `
    Function.prototype.bind = function(context) {
         var that = this;
@@ -69,13 +57,10 @@
 `
 
 ## js基本数据类型 基础类型 
-
 `
 Undefined、Null、Boolean、Number和String
 `
-
 ## js数据类型判断 typeof instanceof constructor
-
 `
     typeof 操作数，具有性就是对象数据类型区分不开。
     instanceof  两个操作数，返回true/false，表示s是否为类的示例，得到具体类型。
@@ -83,11 +68,9 @@ Undefined、Null、Boolean、Number和String
 `
 
 ## js数据类型隐式转化
-
 `
     [1,2] + [3,4] = '1,23,4'  [] == [] => false  {} + [] = [Object object]
 `
-
 ## js变量提升[预编译期间会将变量声明与函数声明提升至其对应作用域的最顶端] 
 
 `
@@ -198,9 +181,9 @@ Undefined、Null、Boolean、Number和String
    主线程执行完毕
    轮询回调队列，根据优先级调用
 `
-## Promise的理解
+## Promise的理解 []
 
-## 节流是如何处理的
+## 节流是如何处理的 [见test.js源码]
 
 ## ES6 7 8
 
@@ -211,12 +194,19 @@ Undefined、Null、Boolean、Number和String
 - (0.1*10+0.2*10)/10 ===0.3
 - parseFloat((0.1+0.2).toFixed(10)) ===0.3 toFixed返回的是字符串，需要parseFloat转为浮点型
 
-- 原因? 在某个精度点直接舍弃。当然，代价就是，0.1在计算机内部根本就不是精确的0.1，而是一个有舍入误差的0.1。当代码被编译或解释后，0.1已经被四舍五入成一个与之很接近的计算机内部数字，以至于计算还没开始，一个很小的舍入错误就已经产生了。这也就是 0.1 + 0.2 不等于0.3 的原因。
+- 原因 ? 在某个精度点直接舍弃。当然，代价就是，0.1在计算机内部根本就不是精确的0.1，而是一个有舍入误差的0.1。当代码被编译或解释后，0.1已经被四舍五入成一个与之很接近的计算机内部数字，以至于计算还没开始，一个很小的舍入错误就已经产生了。这也就是 0.1 + 0.2 不等于0.3 的原因。
 
-## vue生命周期
+## vue生命周期 [参考链接: https://segmentfault.com/a/1190000011381906]
 
-## vue双向绑定原理
-## vue指令的用法
+## vue双向绑定原理 [参考链接地址: https://www.jianshu.com/p/78b31df97b70]
+`
+Object.defineProperty 是 ES5 中一个无法 shim 的特性，这也就是 Vue 不支持 IE8 以及更低版本浏览器的原因。
+`
+
+## vue指令的用法 [参考链接: https://segmentfault.com/a/1190000020865320]
+`
+
+`
 
 ## React 生命周期
 `
@@ -236,7 +226,41 @@ Undefined、Null、Boolean、Number和String
     getSnapshotBeforeUpdate(prevProps, prevState)
 `
 
-## React 高阶函数
+## React 高阶函数 [参考链接: https://www.jianshu.com/p/68c6ab7c35dc]
+`
+    // 首字母大写!! 无状态组件
+    const HOC = (InnerComponent) => class extends React.Component{
+        render(){
+            return(
+                <InnerComponent/>
+            )
+        }
+    }
+    const Button = HOC((props) => <button>{props.children}</button>) //无状态组件
+    //传统组件
+    class Label extends React.Component{
+        render(){
+            return(
+                <label>{this.props.children}</label>
+            )
+        }
+    }
+    const LabelHoc = HOC(Label);
+    //根组件
+    class App extends React.Component{
+        render(){
+            return(
+                <div>
+                    <Button>button</Button>
+                    <br/>
+                    <LabelHoc>label</LabelHoc>
+                </div>
+            )
+        }
+    }
+    module.exports = App
+`
+
 ## React setState同步和异步的区分
 ## React 新特性
 ## React fiber的原理
@@ -246,7 +270,7 @@ Undefined、Null、Boolean、Number和String
 
 ## vuex实现原理
 ## redux实现原理和状态更新流程
-## mbox实现原理和状态更新流程
+## mbox实现原理和状态更新流程 [参考链接: https://www.jianshu.com/p/bea658a8b721]
 ## vuex vs redux vs mbox
 
 ## webpack

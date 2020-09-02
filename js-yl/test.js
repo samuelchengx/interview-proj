@@ -61,7 +61,7 @@ _LazyMan.prototype.FirstSleep = function (time) {
 // LazyMan('samuel').FirstSleep(4).sleep(3).eat('noodles');
 /*****************************************  实现一个LazyMan END   *************************************/
 
-/*************************************  实现apply/call/bind START ***********************************/
+/*************************************  实现apply/call/bind/instanceof START ***********************************/
 function fn1(){
     console.log(this, arguments);
 }
@@ -108,7 +108,25 @@ Function.prototype.bind = function (context) {
 
 // let bindFn = fn2.bind(obj, 'xxx');
 // bindFn(30);
-/***************************************** 实现apply/call/bind END *********************************/
+
+
+function instance_of(L, R) {
+    var O = R.prototype;
+    var L = L.__proto__;
+    while (true) {
+        if(L=== null){
+            break;
+            return false;
+        }
+        if(L === O){
+            break;
+            return true;
+        }
+        L = L.__proto__;
+    }
+}
+
+/***************************************** 实现apply/call/bind/instanceof END *********************************/
 
 /***************************************** 实现深拷贝和浅拷贝 START   ********************************/
 // 只赋值第一层的浅拷贝
@@ -235,6 +253,9 @@ function unique3(arr) {
 // 函数防抖（debounce）、函数节流（throttle）
 // debounce: 事件被触发，等待n秒后再执行回调，如果在这n秒内又被触发，则重新计数
 // throttle: 规定在一个单位时间内，只能有一次触发事件的回调函数执行，如果在同一个单位时间内某某被触发多次，则只有一次能生效
+// 参考链接: https://www.jianshu.com/p/64f6183a8163
+
+// 使用场景: input用户输入 滚动计算
 function debounce(fn, wait) {
     var timer = null;
     return function () {
@@ -387,9 +408,7 @@ var child2 = new Child();
 // 寄生继承
 // 寄生组合式继承
 
-
 /**************************** 继承 END ***********************/
-
 
 /**************************** 设计模式 START ***********************/
 
@@ -399,10 +418,13 @@ var child2 = new Child();
 
 /**************************** 前端经典算法 END ***********************/
 
-
 /**************************** 前端常见算法 START ***********************/
 
 /**************************** 前端常见算法 END ***********************/
+
+/**************************** class实现 START ***********************/
+
+/**************************** class实现 END ***********************/
 
 
 
