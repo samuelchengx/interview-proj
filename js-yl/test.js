@@ -62,7 +62,7 @@ _LazyMan.prototype.FirstSleep = function (time) {
 /*****************************************  实现一个LazyMan END   *************************************/
 
 /*************************************  实现apply/call/bind/instanceof START ***********************************/
-function fn1(){
+function fn1() {
     console.log(this, arguments);
 }
 
@@ -406,7 +406,6 @@ var child2 = new Child();
 
 // 寄生继承
 // 寄生组合式继承
-
 /**************************** 继承 END ***********************/
 
 /**************************** 设计模式 START ***********************/
@@ -416,38 +415,130 @@ var child2 = new Child();
 /**************************** 前端经典算法 START ***********************/
 // 参考链接地址1: https://www.cnblogs.com/libin-1/p/5998870.html
 // 参考链接地址2: https://zhuanlan.zhihu.com/p/101522204
-
-
+// 判断是否是一个回文
+function checkPalindrom(str) {
+    return str.split('').reverse().join(',') === str;
+}
 // 字符串中出现次数最多的字符和次数
+var longStr = 'afjghdfraaaasdenas';
+function getMostCharAndCount(str) {
+    if(str.length == 1) {
+        return {
+            char: str,
+            count: 1
+        };
+    }
+    var tempObj = {};
+    for(var i = 0; i < str.length; i++) {
+        if(!tempObj[str[i]]){
+            tempObj[str[i]] = 1;
+        } else {
+            tempObj[str[i]] += 1;
+        }
+    }
+    var mostChar = '';
+    var mostCount = 0;
+    for(var k in tempObj){
+        if(tempObj[k]>mostCount){
+            mostCount = tempObj[k];
+            mostChar = k;
+        }
+    }
+    return {
+        char: mostChar,
+        count: mostCount
+    }
+}
+console.log('-----getMostCharAndCount-----', getMostCharAndCount(longStr));
 // 页面中出现最多次数的标签和次数
-//
+function getTagNameAndCount() {
+    var nodeArr = document.getElementsByTagName('*');
+    var targetName = 0;
+    var count = 0;
+    var map = new Map();
+    for(var i = 0; i<nodeArr.length; i++){
+        var ele = nodeArr[i]; // dom元素
+        var tagName = ele.tagName; // 标签名
+        if(map.get(tagName)){
+            if(count < map.get(tagName) +1){
+                count = map.get(tagName) +1;
+                targetName = tagName;
+            }
+            map.set(tagName, map.get(tagName)+1);
+        } else {
+            map.set(tagName, 1);
+        }
+    }
+    return {targetName: targetName, count: count}
+}
 
 /**************************** 前端经典算法 END ***********************/
 
 /**************************** 前端常见算法 START ***********************/
 let arr = [8, 12, 6, 17, 1];
 function swap(arr, i, j) {
-
+    var temp;
+    temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+    return arr;
 }
-
-// 冒泡排序+优化
+// 冒泡排序 + 优化
 Array.prototype.bubble = function () {
-
+    var arr = this;
+    var len = arr.length;
+    var flag = true; // 设置标识优化排序
+    for(var i = 0; i < len; i++) {
+        for(var j =0; j < len - i -1; j++){
+            // 相邻两数，两两交换
+            if(arr[j+1] < arr[j]){
+                swap(arr, j, j+1);
+                flag = false;
+            }
+        }
+        if(flag) {
+            return arr;
+        }
+    }
+    return arr;
 }
-
-arr.bubble();
-
+// console.log('-----冒泡排序-----',arr.bubble());
 // 插入排序
 Array.prototype.insert = function () {
-
+    var arr = this;
+    var preIndex, current;
+    for(var i = 1; i < arr.length; i++) {
+        preIndex = i - 1;
+        current = arr[i];
+        while (preIndex >= 0 && current < arr[preIndex]){
+            arr[preIndex+1] = arr[preIndex];
+            preIndex--;
+        }
+        arr[preIndex+1] = current;
+    }
+    return arr;
 }
-
+// console.log('-----插入排序-----',arr.insert());
 // 快速排序
 Array.prototype.quick = function () {
-
+   var arr = this;
+   if(arr.length < 2){
+       return arr;
+   }
+   var index = Math.floor(arr.length/2);
+   var middle = arr.splice(index,1);
+   var left = [];
+   var right = [];
+   arr.forEach(el => {
+       if(el > middle[0]) {
+           right.push(el);
+       } else {
+           left.push(el);
+       }
+   });
+   return left.quick().concat(middle, right.quick());
 }
-
-
+// console.log('-----快速排序-----',arr.quick());
 
 /**************************** 前端常见算法 END ***********************/
 

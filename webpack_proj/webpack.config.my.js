@@ -6,24 +6,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 // js压缩
 const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
-
 const webpack = require('webpack');
-
 // postcss-loader autoprefixer
 // mini-css-extract-plugin
 // es6转化 babel-loader @babel/core @babel/preset-env
-
 // expose-loader 暴露变量为全局的loader
 // pre 前面执行的loader normal 普通loader 内联loader 后置 postloader
-
 // expose-loader暴露全局、provide、cdn
-
 // @babel/plugin-transform-runtime
-
 // 'aaa'.include('a') es7语法 @babel-polyfill
-
 // eslint eslint-loader 语法校验
-
 // webpack是node写出来的 node的写法
 module.exports = {
     // 优化项
