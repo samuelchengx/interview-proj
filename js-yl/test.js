@@ -451,7 +451,45 @@ UserFactory.prototype = {
     }
 };
 var SuperAdmin = UserFactory('SuperAdmin');
-console.log('SuperAdmin', SuperAdmin);
+// console.log('SuperAdmin', SuperAdmin);
+
+// 策略模式
+function vip() {
+    this.discount = .5;
+}
+vip.prototype.getPrice = function (price){
+    return price * this.discount
+}
+function oldPrice() {
+    this.discount = .3;
+}
+oldPrice.prototype.getPrice = function (price){
+    return price * this.discount
+}
+function Price() {
+    this.discount = 1;
+}
+Price.prototype.getPrice = function (price){
+    return price * this.discount
+}
+function Waste(){
+    this.name = '';
+    this.strategy = null;
+    this.price = 0;
+}
+Waste.prototype.set = function (name, strategy, price) {
+    this.name = name;
+    this.strategy = strategy;
+    this.price = price;
+}
+Waste.prototype.getResult = function () {
+    console.log(this.name + '的结账金额是: ' + this.strategy.getPrice(this.price));
+}
+var waste = new Waste();
+var vip = new vip();
+waste.set ('vip客户', vip, 200);
+// vip客户的结账价为: 100
+// waste.getResult();
 
 
 
