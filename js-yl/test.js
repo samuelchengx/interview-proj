@@ -460,7 +460,7 @@ function getTagNameAndCount() {
         var ele = nodeArr[i]; // dom元素
         var tagName = ele.tagName; // 标签名
         if(map.get(tagName)){
-            if(count < map.get(tagName) +1){
+            if(count < map.get(tagName) +1) {
                 count = map.get(tagName) +1;
                 targetName = tagName;
             }
@@ -489,7 +489,7 @@ Array.prototype.bubble = function () {
     var len = arr.length;
     var flag = true; // 设置标识优化排序
     for(var i = 0; i < len; i++) {
-        for(var j =0; j < len - i -1; j++){
+        for(var j = 0; j < len - i -1; j++){
             // 相邻两数，两两交换
             if(arr[j+1] < arr[j]){
                 swap(arr, j, j+1);
@@ -510,7 +510,7 @@ Array.prototype.insert = function () {
     for(var i = 1; i < arr.length; i++) {
         preIndex = i - 1;
         current = arr[i];
-        while (preIndex >= 0 && current < arr[preIndex]){
+        while (preIndex >= 0 && current < arr[preIndex]) {
             arr[preIndex+1] = arr[preIndex];
             preIndex--;
         }
