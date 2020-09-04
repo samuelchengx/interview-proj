@@ -491,8 +491,89 @@ waste.set ('vip客户', vip, 200);
 // vip客户的结账价为: 100
 // waste.getResult();
 
+// 观察者模式
+class Observe{
+    constructor(fn) {
+        this.update = fn;
+    }
+}
+class Sub{
+    constructor() {
+        this.observerList = [];
+    }
+    submit(observer) {
+        this.observerList.push(observer);
+    }
+    unSubmit(observe) {
+        this.observerList.filter(ob => ob != observe);
+    }
+    notify() {
+        this.observerList.forEach(ob => ob.update());
+    }
+    onChange(){
+        setTimeout(() => {
+            this.notify();
+        }, 1000)
+    }
+}
+let ob1 = new Observe(() => { console.log('fn1') });
+let ob2 = new Observe(() => { console.log('fn2') });
+let sub = new Sub();
+sub.submit(ob1);
+sub.submit(ob2);
+// sub.onChange();
+
+// 发布订阅模式
+class Event {
+    constructor() {
+        this.observe = {};
+    }
+    on(type, listener) {
+        if(listener.__once__){
+            this.observe[type].forEach(handler=>{
+                if(handler===listener){
+                    return;
+                }
+            });
+        }
+        if(this.observe[type]){
+            this.observe[type].push(listener);
+        } else {
+            this.observe[type] = [listener];
+        }
+    }
+    emit(type, ...args) {
+        let onceHandler = [];
+        if(this.observe[type]){
+            this.observe.map(listener => {
+                listener(...args);
+                if(listener.__once__) {
+                    onceHandler.push(listener);
+                }
+            });
+        }
+        onceHandler.forEach(handler => {
+            this.off(type, handler);
+        });
+    }
+    off(type, handler) {
+        if(type && !handler){
+            delete this.observe[type];
+        }
+        if(type && handler &&this.observe[type]){
+            this.observe[type].filter(cb => {
+                return cb !== handler;
+            });
+        }
+    }
+    once(type, listener) {
+        listener.__once__ = true;
+        this.on(type, listener);
+    }
+}
 
 
+/******* 单例模式/工厂模式/策略模式/发布订阅[观察者]模式/ ******/
 
 /**************************** 设计模式 END ***********************/
 
