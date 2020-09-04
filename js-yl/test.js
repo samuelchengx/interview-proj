@@ -113,7 +113,7 @@ function instance_of(L, R) {
     var O = R.prototype;
     var L = L.__proto__;
     while (true) {
-        if(L=== null){
+        if(L === null){
             break;
             return false;
         }
@@ -144,12 +144,12 @@ let obj1 = {
     }
 };
 let obj2 = simpleCopy(obj1);
-obj2.a = 10;
-obj2.c.d = 30;
-console.log('obj1.a', obj1.a);
-console.log('obj2.a', obj2.a);
-console.log('obj1.c.d', obj1.c.d);
-console.log('obj2.c.d', obj2.c.d);
+// obj2.a = 10;
+// obj2.c.d = 30;
+// console.log('obj1.a', obj1.a);
+// console.log('obj2.a', obj2.a);
+// console.log('obj1.c.d', obj1.c.d);
+// console.log('obj2.c.d', obj2.c.d);
 // Object.assign方法
 // 直接用=赋值
 
@@ -157,12 +157,12 @@ console.log('obj2.c.d', obj2.c.d);
 function deepClone(obj) {
     let objClone = Array.isArray(obj) ? [] : {};
     if(obj && typeof obj === 'object') {
-        for (key in obj) {
-            if(obj.hasOwnProperty(key)){
-                if(typeof obj[key] === 'object'){
-                    objClone[key] = deepClone(obj[key]);
+        for(let k in obj) {
+            if(obj.hasOwnProperty(k)){
+                if(obj[k] && typeof obj[k] === 'object'){
+                    objClone[k] = deepClone(obj[k]);
                 } else {
-                    objClone[key] = obj[key];
+                    objClone[k] = obj[k];
                 }
             }
         }
@@ -180,8 +180,8 @@ let obj11 = {
 
 let obj22 = deepClone(obj11);
 obj22.c.d = 3000;
-console.log('--obj11.c.d---', obj11.c.d);
-console.log('--obj22.c.d---', obj22.c.d);
+// console.log('--obj11.c.d---', obj11.c.d);
+// console.log('--obj22.c.d---', obj22.c.d);
 
 // JSON.parse(JSON.stringify(obj)); 缺点: 属性值为function, 拷贝后为undefined
 // lodash函数库实现深拷贝 let result = _.cloneDeep(test)
@@ -305,7 +305,6 @@ function throttle(fn, gapTime) {
     }
 }
 
-
 function throttleHandle(){
     console.log('throttle function doing...');
 }
@@ -409,6 +408,53 @@ var child2 = new Child();
 /**************************** 继承 END ***********************/
 
 /**************************** 设计模式 START ***********************/
+// 单例模式
+// 这种设计模式的思想是确保一个类只有唯一实例，一般用于全局缓存，
+// 比如全局window，唯一登录浮窗等。
+function single(){
+    var instance;
+    function getInstance(){
+        if(instance === undefined){
+            instance = new Construct();
+        }
+        return instance
+    }
+    function Construct(){
+        // 生成单例的代码
+    }
+    return {
+        getInstance: getInstance
+    }
+}
+
+// 工厂模式
+let UserFactory = function (role) {
+    if(this instanceof UserFactory){
+        var s = new this[role]();
+        return s;
+    } else {
+        return new UserFactory(role);
+    }
+}
+UserFactory.prototype = {
+    SuperAdmin: function () {
+        this.name = 'super admin';
+        this.viewPage = ['a1', 'b1', 'c1'];
+    },
+    Admin: function () {
+        this.name = 'admin';
+        this.viewPage = ['a2', 'b2', 'c3'];
+    },
+    User: function () {
+        this.name = 'user';
+        this.viewPage = ['a3', 'b3', 'c3'];
+    }
+};
+var SuperAdmin = UserFactory('SuperAdmin');
+console.log('SuperAdmin', SuperAdmin);
+
+
+
 
 /**************************** 设计模式 END ***********************/
 
@@ -449,7 +495,7 @@ function getMostCharAndCount(str) {
         count: mostCount
     }
 }
-console.log('-----getMostCharAndCount-----', getMostCharAndCount(longStr));
+// console.log('-----getMostCharAndCount-----', getMostCharAndCount(longStr));
 // 页面中出现最多次数的标签和次数
 function getTagNameAndCount() {
     var nodeArr = document.getElementsByTagName('*');
@@ -589,9 +635,9 @@ var ParentClass = (function(){
     }]);
     return Parent;
 })();
-console.log('ParentClass', ParentClass.prototype);
+// console.log('ParentClass', ParentClass.prototype);
 let person111 = new ParentClass('samuelcheng', 29);
-person111.say();
+// person111.say();
 /**************************** class实现 END ***********************/
 
 
