@@ -273,11 +273,102 @@ Object.defineProperty 是 ES5 中一个无法 shim 的特性，这也就是 Vue 
 ## mbox实现原理和状态更新流程 [参考链接: https://www.jianshu.com/p/bea658a8b721]
 ## vuex vs redux vs mbox
 
-## webpack
+## webpack构建流程
 - webpack宗旨：一切皆模块；
 - 热更新原理；
 - webpack内部构建流程(读取文件，解析为ast，匹配对应的loader，执行对应的插件，输出结果)；
 - 别的构建工具gulp grunt rollup...。
+
+## webpack性能优化、提升构建速度
+
+###  慢在哪里??
+
+- 全量构建过慢，即使是很小改动，要等长时间看到更新与编译后（HMR热更新有明显改进）
+- 项目复杂度增加，模块体积急剧增大，构建的模块以M为单位计算；
+- 多个项目之间共用基础资源存在重复打包，基础库代码复用率不高；
+- node的单进程实现在耗cpu计算型loader中表现不佳；
+### 何如解决??
+- 合理配置CommonsChunkPlugin lib抽到vendors、提取公共代码
+- 通过externals配置来提取常用库
+- 利用DllPlugin和DllReferencePlugin预编译资源模块
+
+### webpack3和webpack4的区别
+
+- mode webpack4中通过内置的mode使用相应模式的内置优化.dev侧重于构建，prod侧重于体积大小；
+- CommonsChunkPlugin webpack4已移除  使用optimization.splitChunks
+- mini-css-extract-plugin(CSS文件提取) webpack4删除原插件，新增extract-text-webpack-plugin配置；
+- 新版 babel 使用新的命名空间 @babel
+
+## webpack打包hash是怎么生成的
+
+- hash表示的是静态文件的内容hash值
+
+## 移动端适配方案 [参考链接地址: https://zhuanlan.zhihu.com/p/80692165]
+
+- viewport适配
+`
+<meta name="viewport" content="width=750,initial-scale=0.5">
+initial-scale = 屏幕的宽度 / 设计稿的宽度
+<script>
+    const WIDTH = 750;
+    const mobileAdapter = () => {
+      let scale = screen.width / WIDTH;
+      let content = `width=${WIDTH}, initial-scale=${scale}, maximum-scale=${scale}, minimum-scale=${scale}`
+      let meta = document.querySelector('meta[name=viewport]');
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', 'viewport');
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content',content);
+    };
+    mobileAdapter();
+    window.onorientationchange = mobileAdapter //屏幕翻转时再次执行
+  </script>
+  缺点就是边线问题，不同尺寸下，边线的粗细是不一样的（等比缩放后），全部元素都是等比缩放，实际显示效果可能不太好
+`
+
+- vw适配（部分等比缩放）
+`
+    开发者拿到设计稿（假设设计稿尺寸为750px，设计稿的元素标注是基于此宽度标注）
+    开始开发，对设计稿的标注进行转换，把px换成vw。比如页面元素字体标注的大小是32px，换成vw为 (100/750)*32 vw
+    对于需要等比缩放的元素，CSS使用转换后的单位
+    对于不需要缩放的元素，比如边框阴影，使用固定单位px
+`
+
+- rem适配
+`
+    开发者拿到设计稿（假设设计稿尺寸为750px，设计稿的元素标是基于此宽度标注）
+    开始开发，对设计稿的标注进行转换
+    对于需要等比缩放的元素，CSS使用转换后的单位
+    对于不需要缩放的元素，比如边框阴影，使用固定单位px
+`
+- 弹性盒适配（合理布局）
+
+## Hybird通信方案
+
+- JS/Android/iOS三个台各自的特性进行封装，做到在JS侧差异内化解决。
+
+- Native调用JS
+`
+    mWebView = new WebView(this); //即当前webview对象			
+    mWebView.loadUrl("javascript: 方法名('参数,需要转为字符串')"); 
+    
+    //异步执行JS代码,并获取返回值	
+    mWebView.evaluateJavascript("javascript: 方法名('参数,需要转为字符串')", new ValueCallback() {
+            @Override
+            public void onReceiveValue(String value) {
+        		//这里的value即为对应JS方法的返回值
+            }
+    });
+`
+
+- JS调用Native
+
+
+
+
+
 
 ## js-bridge原理
 
