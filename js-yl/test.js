@@ -911,7 +911,6 @@ var objArrowFn = {
 // setTimout promisify化
 // 将setTimeout封装成promise名为delay，调用形式如下
 // delay(ms).then(() => console.log('print after ms'))
-
 function delay(fn) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -926,7 +925,6 @@ function delay(fn) {
         }, 1000);
     });
 }
-
 function delayFnTest() {
     var p = new Promise(function (resolve, reject) {
         setTimeout(() => {
@@ -936,13 +934,24 @@ function delayFnTest() {
     });
     return p;
 }
-
-delay(delayFnTest).then(() => console.log('print after ms'));
-
+// delay(delayFnTest).then(() => console.log('print after ms'));
 /******************** setTimout promisify化 END **************************/
 
-
-
+/******************** getNumber START **************************/
+// 实现一个函数，每次调用返回下一个偶数，不允许使用全局变量
+function countFn() {
+    let count = 1;
+    return function () {
+        console.log(count+1);
+        count+=2;
+    };
+}
+let getNumber = countFn();
+getNumber();
+getNumber();
+getNumber();
+getNumber();
+/******************** getNumber END **************************/
 
 
 
