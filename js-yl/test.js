@@ -1,3 +1,6 @@
+// 参考链接地址: https://www.zybuluo.com/duanyubin/note/1621237
+
+
 /**
  * 实现一个LazyMan流程控制
  * @param name
@@ -760,6 +763,7 @@ let person111 = new ParentClass('samuelcheng', 29);
 /**************************** class实现 END ***********************/
 
 /************************** forEach实现 START ********************/
+// 参考链接地址: https://blog.csdn.net/alex_programmer/article/details/104383843
 
 function for_Each(arr, cb, flag) {
     if(!Array.isArray(arr)){
@@ -825,16 +829,20 @@ var objGetProperty = {
 // console.log(getValueByPath(objGetProperty, 'a.b.c'));
 /***********************  getProperty(obj, 'a.b.c') END **********************/
 
+/*********************** 比较两个对象是否相等 START ***************************/
+
+/*********************** 比较两个对象是否相等 END ***************************/
+
 /*********************** 找到值在二维数组中的位置 START ***************************/
 // 在从左向右和从上往下皆为升序的二维数组中，查找一个数是否存在，存在的话输出它的位置。
 // [1,2, 3, 15],
 // [4,5,10,16],
 // [7,8,11,17]
 
+
 /*********************** 找到值在二维数组中的位置 END ***************************/
 
 /*********************** deepEqual&&shallowEqual START **********************/
-
 
 /*********************** deepEqual&&shallowEqual END **********************/
 
@@ -868,7 +876,7 @@ function flatArr2(arr) {
 // 1、箭头函数是匿名函数不能作为构造函数new
 // 2、箭头函数不能绑定arguments
 // 3、箭头函数没有原型属性
-function A(a){
+function A(a) {
     console.log(arguments);
 }
 // A(1,2,3,4,5,8);
@@ -882,10 +890,8 @@ var a = () => 1;
 function b () { return 2;}
 // console.log(a.prototype);
 // console.log(b.prototype);
-
 // 箭头函数的this永远指向其上下文的this，没有办改变其指向，普通函数的this指向调用它的对象
 // 箭头函数不绑定this，会捕获其所在的上下文的this值，作为自己的this值
-
 var objArrowFn = {
     a: 10,
     b: () => {
@@ -899,8 +905,42 @@ var objArrowFn = {
 }
 // objArrowFn.b();
 // objArrowFn.c();
-
 /********************* 箭头函数和普通函数的区别 END *****************************/
+
+/******************** setTimout promisify化 START **************************/
+// setTimout promisify化
+// 将setTimeout封装成promise名为delay，调用形式如下
+// delay(ms).then(() => console.log('print after ms'))
+
+function delay(fn) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let res = fn();
+            if(res && res.then){
+                res.then(()=>{
+                    resolve();
+                })
+            } else {
+                resolve();
+            }
+        }, 1000);
+    });
+}
+
+function delayFnTest() {
+    var p = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+            console.log('delayFn done');
+            resolve();
+        }, 2000);
+    });
+    return p;
+}
+
+delay(delayFnTest).then(() => console.log('print after ms'));
+
+/******************** setTimout promisify化 END **************************/
+
 
 
 
