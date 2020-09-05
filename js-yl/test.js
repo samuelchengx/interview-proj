@@ -802,11 +802,19 @@ for_Each([1,2,3,4], function (...args) {
 
 /********************* JS数组排列组合 END *********************/
 
-/***********************  getProperty(obj, 'a.b.c') START *********************/
-function getProperty(obj, path) {
-
+/***********************  getValueByPath(obj, 'a.b.c') START *********************/
+function getValueByPath(obj, path){
+    var props = path.split('.');
+    for(var i = 0; i < props.length; i++){
+        var p = props[i];
+        if(obj && obj.hasOwnProperty(p)){
+            obj = obj[p];
+        } else {
+            return undefined;
+        }
+    }
+    return obj;
 }
-
 var objGetProperty = {
     a: {
         b: {
@@ -814,7 +822,7 @@ var objGetProperty = {
         }
     }
 }
-console.log(getProperty(objGetProperty, 'a.b.c'));
+console.log(getValueByPath(objGetProperty, 'a.b.c'));
 /***********************  getProperty(obj, 'a.b.c') END **********************/
 
 /*********************** 找到值在二维数组中的位置 START ***************************/
