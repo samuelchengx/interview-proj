@@ -787,8 +787,8 @@ function for_Each(arr, cb, flag) {
 }
 
 for_Each([1,2,3,4], function (...args) {
-    console.log('args', ...args);
-}, true)
+    // console.log('args', ...args);
+}, true);
 
 /************************** forEach实现 END ********************/
 
@@ -822,7 +822,7 @@ var objGetProperty = {
         }
     }
 }
-console.log(getValueByPath(objGetProperty, 'a.b.c'));
+// console.log(getValueByPath(objGetProperty, 'a.b.c'));
 /***********************  getProperty(obj, 'a.b.c') END **********************/
 
 /*********************** 找到值在二维数组中的位置 START ***************************/
@@ -863,6 +863,45 @@ function flatArr2(arr) {
 
 
 /********************** 合并两个有序数组 END *******************************/
+
+/********************* 箭头函数和普通函数的区别 START *****************************/
+// 1、箭头函数是匿名函数不能作为构造函数new
+// 2、箭头函数不能绑定arguments
+// 3、箭头函数没有原型属性
+function A(a){
+    console.log(arguments);
+}
+// A(1,2,3,4,5,8);
+// [1, 2, 3, 4, 5, 8, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+let C = (...c) => {
+    console.log(c);
+}
+// C(3,82,32,11323);
+// [3, 82, 32, 11323]
+var a = () => 1;
+function b () { return 2;}
+// console.log(a.prototype);
+// console.log(b.prototype);
+
+// 箭头函数的this永远指向其上下文的this，没有办改变其指向，普通函数的this指向调用它的对象
+// 箭头函数不绑定this，会捕获其所在的上下文的this值，作为自己的this值
+
+var objArrowFn = {
+    a: 10,
+    b: () => {
+        console.log(this.a); // undefined
+        console.log(this); // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}
+    },
+    c: function() {
+        console.log(this.a); // 10
+        console.log(this); // {a: 10, b: ƒ, c: ƒ}
+    }
+}
+// objArrowFn.b();
+// objArrowFn.c();
+
+/********************* 箭头函数和普通函数的区别 END *****************************/
+
 
 
 
