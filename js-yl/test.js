@@ -274,13 +274,12 @@ function debounce(fn, wait) {
     }
 }
 
-function fn(){
+function fn() {
     console.log('debounce function doing...');
 }
 
 // setInterval(debounce(fn, 500), 1000);
 // setInterval(debounce(fn, 2000), 1000);
-
 function throttle(fn, gapTime) {
     var _lastTime;
     var timer = null;
@@ -288,12 +287,11 @@ function throttle(fn, gapTime) {
         var _nowTime = new Date().getTime();
         var context = this;
         var args = arguments;
-
         if(!_lastTime) {
             _lastTime = new Date().getTime();
             fn.apply(context, args);
-        } else if( _nowTime - _lastTime < gapTime ) {
-            if(timer){
+        } else if(_nowTime - _lastTime < gapTime) {
+            if(timer) {
                 clearTimeout(timer);
                 timer = null;
             }
@@ -416,7 +414,7 @@ var child2 = new Child();
 // 比如全局window，唯一登录浮窗等。
 function single(){
     var instance;
-    function getInstance(){
+    function getInstance() {
         if(instance === undefined){
             instance = new Construct();
         }
@@ -424,6 +422,7 @@ function single(){
     }
     function Construct(){
         // 生成单例的代码
+
     }
     return {
         getInstance: getInstance
@@ -500,7 +499,7 @@ class Observe{
         this.update = fn;
     }
 }
-class Sub{
+class Sub {
     constructor() {
         this.observerList = [];
     }
@@ -513,12 +512,13 @@ class Sub{
     notify() {
         this.observerList.forEach(ob => ob.update());
     }
-    onChange(){
+    onChange() {
         setTimeout(() => {
             this.notify();
-        }, 1000)
+        }, 1000);
     }
-}
+};
+
 let ob1 = new Observe(() => { console.log('fn1') });
 let ob2 = new Observe(() => { console.log('fn2') });
 let sub = new Sub();
@@ -539,7 +539,7 @@ class Event {
                 }
             });
         }
-        if(this.observe[type]){
+        if(this.observe[type]) {
             this.observe[type].push(listener);
         } else {
             this.observe[type] = [listener];
@@ -547,7 +547,7 @@ class Event {
     }
     emit(type, ...args) {
         let onceHandler = [];
-        if(this.observe[type]){
+        if(this.observe[type]) {
             this.observe.map(listener => {
                 listener(...args);
                 if(listener.__once__) {
@@ -574,8 +574,6 @@ class Event {
         this.on(type, listener);
     }
 }
-
-
 /******* 单例模式/工厂模式/策略模式/发布订阅[观察者]模式/ ******/
 
 /**************************** 设计模式 END ***********************/
@@ -627,12 +625,12 @@ function getTagNameAndCount() {
     for(var i = 0; i<nodeArr.length; i++){
         var ele = nodeArr[i]; // dom元素
         var tagName = ele.tagName; // 标签名
-        if(map.get(tagName)){
-            if(count < map.get(tagName) +1) {
-                count = map.get(tagName) +1;
+        if(map.get(tagName)) {
+            if(count < map.get(tagName) + 1) {
+                count = map.get(tagName) + 1;
                 targetName = tagName;
             }
-            map.set(tagName, map.get(tagName)+1);
+            map.set(tagName, map.get(tagName) + 1);
         } else {
             map.set(tagName, 1);
         }
@@ -659,7 +657,7 @@ Array.prototype.bubble = function () {
     for(var i = 0; i < len; i++) {
         for(var j = 0; j < len - i -1; j++){
             // 相邻两数，两两交换
-            if(arr[j+1] < arr[j]){
+            if(arr[j+1] < arr[j]) {
                 swap(arr, j, j+1);
                 flag = false;
             }
@@ -902,7 +900,7 @@ var objArrowFn = {
         console.log(this.a); // 10
         console.log(this); // {a: 10, b: ƒ, c: ƒ}
     }
-}
+};
 // objArrowFn.b();
 // objArrowFn.c();
 /********************* 箭头函数和普通函数的区别 END *****************************/
@@ -943,18 +941,60 @@ function countFn() {
     let count = 1;
     return function () {
         console.log(count+1);
-        count+=2;
+        count += 2;
     };
 }
 let getNumber = countFn();
-getNumber();
-getNumber();
-getNumber();
-getNumber();
-/******************** getNumber END **************************/
+// getNumber();
+// getNumber();
+// getNumber();
+// getNumber();
+/********************** getNumber END  **************************/
 
+/****************************  xxxxx START  ****************************/
+// 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
 
+/****************************  xxxxx END ****************************/
 
+/****************************  xxxxx START   ****************************/
+// versions是一个项目的版本号列表，因多人维护，不规则
+// var versions=['1.45.0','1.5','6','3.3.3.3.3.3.3']
+// 要求从小到大排序，注意'1.45'比'1.5'大
+// var sorted=['1.5','1.45.0','3.3.3.3.3.3','6']
 
+/****************************  xxxxx END  ****************************/
 
-
+function request(options) {
+    let _defaultOptions = {
+        method: 'get',
+        baseUrl: 'http://localhost:8000',
+        headers: {}, // 请求头
+        data: {} // 请求体
+    }
+    options = {
+        ..._defaultOptions,
+        ...options,
+        headers:{
+            ..._defaultOptions.headers,
+            ...options.headers || {}
+        }
+    }
+    return new Promise(function (resolve, reject) {
+        let xhr = new XMLHttpRequest();
+        xhr.open(options.method, options.baseUrl + options.url);
+        for (let key in options.headers) {
+            xhr.setRequestHeader(key, options.headers[key]);
+        }
+        xhr.responseType = 'json';
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4) {
+                if(xhr.status === 200) {
+                    resolve(xhr.response)
+                }else {
+                    reject(xhr.response);
+                }
+            }
+        }
+        xhr.send(options.data);
+    });
+}
