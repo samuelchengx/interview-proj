@@ -1,6 +1,5 @@
 // 参考链接地址: https://www.zybuluo.com/duanyubin/note/1621237
 
-
 /**
  * 实现一个LazyMan流程控制
  * @param name
@@ -677,7 +676,7 @@ Array.prototype.insert = function () {
         preIndex = i - 1;
         current = arr[i];
         while (preIndex >= 0 && current < arr[preIndex]) {
-            arr[preIndex+1] = arr[preIndex];
+            arr[preIndex + 1] = arr[preIndex];
             preIndex--;
         }
         arr[preIndex+1] = current;
@@ -978,7 +977,7 @@ function request(options) {
             ..._defaultOptions.headers,
             ...options.headers || {}
         }
-    }
+    };
     return new Promise(function (resolve, reject) {
         let xhr = new XMLHttpRequest();
         xhr.open(options.method, options.baseUrl + options.url);

@@ -365,50 +365,41 @@ initial-scale = 屏幕的宽度 / 设计稿的宽度
 
 - JS调用Native
 
-## js-bridge原理
-
-## 前端工程化 
+## 前端工程化 [参考链接: https://www.jianshu.com/p/88ed70476adb]
 
 `
     使用软件工程的技术和方法来进行前端的开发流程、技术、工具、经验等规范化、标准化，
     其主要目的为了提高效率和降低成本，即提高开发过程中的开发效率，减少不必要的重复工作时间，
     而前端工程本质上是软件工程的一种，因此我们应该从软件工程的角度来研究前端工程。
 `
+- 模块化 css的模块化/js模块/图片
+- 组件化 
+- 规范化 命名
+- 自动化 
 
-
-
-
-- 模块化 css的模块化
-- 组件化
-- 规范化
-- 自动化
-
-
-## 动画动画动画 
+## 动画动画动画
 
 ## CSS wiki
-
 `
-img font-size: 0;
-
-适配
-
-居中
-
-css动画 js[setTimeout requestFrameAnimation] css[gpu] svg canvas serverWorker  性能最优: css3
-
-gpu几种方式        
-
-动画库 animate.css
-
+    img font-size: 0;
+    适配
+    居中
+    css动画 js[setTimeout requestFrameAnimation] css[gpu] svg canvas serverWorker  性能最优: css3
+    gpu几种方式      
+    动画库 animate.css
 `
-
-## 跨域解决 
-
+## 跨域解决
 `
-    
+   
+`
+## HTTP/HTTPS/HTTP1/HTTP2 
 `
 
+`
+## es6 
 
+## promise generator iterator async/await
 
+## ssr 骨架屏
 
+## 移动端h5与app通信 jsToNative NativeToJS
