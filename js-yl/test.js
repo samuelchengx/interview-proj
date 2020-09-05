@@ -759,7 +759,102 @@ let person111 = new ParentClass('samuelcheng', 29);
 // person111.say();
 /**************************** class实现 END ***********************/
 
+/************************** forEach实现 START ********************/
 
+function for_Each(arr, cb, flag) {
+    if(!Array.isArray(arr)){
+        return new TypeError('params is not array....');
+    }
+    var queues = [];
+    if(flag) {
+        for(var i = 0; i < arr.length; i++) {
+            var fn = ((o) => {
+                var p = Promise.resolve();
+                cb(arr[o]);
+                return p;
+            })(i);
+            queues.push(fn);
+        }
+        var template = Promise.resolve();
+        for (var j = 0; j < queues.length; j++){
+            template = template.then(queues[j]);
+        }
+        return ;
+    }
+    for(var k = 0; k < arr.length; k++) {
+        cb(arr[k]);
+    }
+}
+
+for_Each([1,2,3,4], function (...args) {
+    console.log('args', ...args);
+}, true)
+
+/************************** forEach实现 END ********************/
+
+
+/************************* JS数组排列组合 START *********************/
+/**
+ * 给定任意二维数组，输出所有的排列组合项。
+ * 比如 [['A','B', 'C'], ['a','b', 'c'], [1, 2]]
+ * 输出 ['Aa1','Aa2','Ab1','Ab2','Ba1','Ba2','Bb1','Bb2']
+ */
+
+/********************* JS数组排列组合 END *********************/
+
+/***********************  getProperty(obj, 'a.b.c') START *********************/
+function getProperty(obj, path) {
+
+}
+
+var objGetProperty = {
+    a: {
+        b: {
+            c: 100
+        }
+    }
+}
+console.log(getProperty(objGetProperty, 'a.b.c'));
+/***********************  getProperty(obj, 'a.b.c') END **********************/
+
+/*********************** 找到值在二维数组中的位置 START ***************************/
+// 在从左向右和从上往下皆为升序的二维数组中，查找一个数是否存在，存在的话输出它的位置。
+// [1,2, 3, 15],
+// [4,5,10,16],
+// [7,8,11,17]
+
+/*********************** 找到值在二维数组中的位置 END ***************************/
+
+/*********************** deepEqual&&shallowEqual START **********************/
+
+
+/*********************** deepEqual&&shallowEqual END **********************/
+
+
+/********************** 实现数组扁平化 START ************************************/
+var arrFlatData = [1, 2, 3, [4, 5], [6, [7, 8, [9], [10, 11, 12, [23]]]]];
+function flatArr1(arr) {
+    var res = [];
+    for(var v of arr) {
+        if(Array.isArray(v)){
+            res.push(...flatArr1(v));
+        } else {
+            res.push(v)
+        }
+    }
+    return res;
+}
+// console.log('-----flatArr1-----', flatArr1(arrFlatData));
+function flatArr2(arr) {
+    return [].concat(arr.map(v => Array.isArray(v) ? [].concat(flatArr2(v)): v));
+}
+// console.log('-----flatArr2-----', flatArr2(arrFlatData));
+/********************** 实现数组扁平化 END ************************************/
+
+/********************** 合并两个有序数组 START *******************************/
+
+
+/********************** 合并两个有序数组 END *******************************/
 
 
 
