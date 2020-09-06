@@ -504,12 +504,44 @@ initial-scale = 屏幕的宽度 / 设计稿的宽度
 
 ## CSS wiki
 `
+    BFC IFC
+    
+    Block Formatting Context 块级格式化上下文。
+    BFC布局规则
+    内部的Box会在垂直方向，一个接一个的放置
+    同一个BFC内，垂直方向的盒子上下margin会重叠
+    每个元素的margin box的左边，与包含块border box的左边连接（对于从右往左的布局，则相反）即使存在浮动也是如此
+    子BFC的区域不会与float box重叠
+    BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之也如此。
+    计算BFC的高度时，浮动元素也参与计算（故也可以达到所谓清除浮动的效果，只要将包裹层转变为BFC）
+    
+    inline Formatting Context 内敛格式化上下文。
+    如何将块级元素转换成BFC
+    具有除了float:none的其他浮动属性
+    定位为absolute或者fixed
+    dispaly为block、inline-block、table-cell、table-caption、flex、inline-flex
+    overflow不为visible（除非该值已经传播到视口，入html body会将overflow的值传播到视口，故此情况下，该属性不能建立BFC）
+    
+    
+    IFC
+    Inline Formatting Context 内敛格式化上下文。
+    
+    ifc是什么
+    IFC的line box（线框高度由其包含行内元素中最高的实际高度计算而来（不受到竖直方向的padding/margin影响）
+    
+    
     img font-size: 0;
     适配
     居中
     css动画 js[setTimeout requestFrameAnimation] css[gpu] svg canvas serverWorker  性能最优: css3
     gpu几种方式      
     动画库 animate.css
+    
+    视觉差效果是如何实现的?
+    给背景图片添加background-attachment:fixed属性,
+    将背景固定在窗口,在使用background-position:top center或0% 0%;
+    后续可以通过js修改background-position的top值,
+    实现背景图片跟随页面上下移动的效果
     
    
    
