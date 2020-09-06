@@ -388,8 +388,13 @@ initial-scale = 屏幕的宽度 / 设计稿的宽度
     动画库 animate.css
 `
 ## 跨域解决
+
 `
-   
+    域名相同、端口号相同、协议相同 
+    接口请求/JSONP
+    接口请求/CORS跨域  
+    接口请求/使用代理跨域
+    跨窗口操作DOM/设置document.domain
 `
 ## HTTP/HTTPS/HTTP1/HTTP2 
 `
