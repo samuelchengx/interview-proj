@@ -15,14 +15,12 @@ function isArray3(value){
  * 1.提问Object.prototype.toString.call为什么不是Array.prototype.toString.call
  */
 
-
 // 2.实现一个方法add(1)(2)(3);
 /**
  *
  * a、闭包
  * b、函数柯里化
  */
-
 // a
 function add1 (m) {
     var temp = function (n) {
@@ -33,8 +31,7 @@ function add1 (m) {
     }
     return temp;
 }
-
-// console.log(add1(1)(2)(3));
+// console.log('----', add1(1)(2)(3));
 function add2(...arg) {
   let a = [...arg];
   let _add = function (...innerArg) {

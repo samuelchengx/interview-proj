@@ -273,7 +273,7 @@ Object.defineProperty 是 ES5 中一个无法 shim 的特性，这也就是 Vue 
 ## mbox实现原理和状态更新流程 [参考链接: https://www.jianshu.com/p/bea658a8b721]
 ## vuex vs redux vs mbox
 
-## webpack构建流程
+## webpack构建流程 [参考链接: https://segmentfault.com/a/1190000006964335];
 - webpack宗旨：一切皆模块；
 - 热更新原理；
 - webpack内部构建流程(读取文件，解析为ast，匹配对应的loader，执行对应的插件，输出结果)；
@@ -282,25 +282,23 @@ Object.defineProperty 是 ES5 中一个无法 shim 的特性，这也就是 Vue 
 ## webpack性能优化、提升构建速度
 
 ###  慢在哪里??
-
 - 全量构建过慢，即使是很小改动，要等长时间看到更新与编译后（HMR热更新有明显改进）
 - 项目复杂度增加，模块体积急剧增大，构建的模块以M为单位计算；
 - 多个项目之间共用基础资源存在重复打包，基础库代码复用率不高；
 - node的单进程实现在耗cpu计算型loader中表现不佳；
+
 ### 何如解决??
 - 合理配置CommonsChunkPlugin lib抽到vendors、提取公共代码
 - 通过externals配置来提取常用库
 - 利用DllPlugin和DllReferencePlugin预编译资源模块
 
 ### webpack3和webpack4的区别
-
 - mode webpack4中通过内置的mode使用相应模式的内置优化.dev侧重于构建，prod侧重于体积大小；
 - CommonsChunkPlugin webpack4已移除  使用optimization.splitChunks
 - mini-css-extract-plugin(CSS文件提取) webpack4删除原插件，新增extract-text-webpack-plugin配置；
 - 新版 babel 使用新的命名空间 @babel
 
 ## webpack打包hash是怎么生成的
-
 - hash表示的是静态文件的内容hash值
 
 ## 移动端适配方案 [参考链接地址: https://zhuanlan.zhihu.com/p/80692165]
@@ -384,7 +382,6 @@ initial-scale = 屏幕的宽度 / 设计稿的宽度
         画质上，gif 支持颜色少(最大256色)、Alpha 透明度支持差，图像锯齿毛边比较严重；
         交互上，不能直接控制播放、暂停、播放次数，灵活性差；
         性能上，gif 会引起页面周期性的绘画，性能较差。
-    
     2、CSS3帧动画
         CSS3帧动画是我们今天需要重点介绍的方案，最核心的是利用CSS3中Animation动画，
         确切的说是使用animation-timing-function 的阶梯函数 steps(number_of_steps, direction)
@@ -396,12 +393,10 @@ initial-scale = 屏幕的宽度 / 设计稿的宽度
         多张图片会带来多个 HTTP 请求
         每张图片首次加载会造成图片切换时的闪烁
         不利于文件的管理
-        
-        （2）连续切换雪碧图位置（推荐）
+    （2）连续切换雪碧图位置（推荐）
         我们将所有的帧动画图片合并成一张雪碧图，通过改变 background-position 的值来实现动画帧切换。分两步进行：
         步骤一： 将动画帧合并为雪碧图，雪碧图的要求可以看上面素材准备，比如动画雪碧图，共20帧。
         步骤二： 使用steps阶梯函数切换雪碧图位置
-        
         .sprite {
             width: 300px;
             height: 300px;
@@ -432,7 +427,6 @@ initial-scale = 屏幕的宽度 / 设计稿的宽度
             95% {background-position: -5700px 0;}
             100% {background-position: -6000px 0;}
         }
-        
         这里我们先来了解下animation-timing-function属性。
         CSS animation-timing-function属性定义CSS动画在每一动画周期中执行的节奏。
         对于关键帧动画来说，timing function作用于一个关键帧周期而非整个动画周期，即从关键帧开始开始，
@@ -445,16 +439,13 @@ initial-scale = 屏幕的宽度 / 设计稿的宽度
         step-start 等同于 step(1, start)。step-end 等同于 step(1, end)。
         综上我们可以知道，因为我们详细定义了一个关键帧周期，从开始到结束，每两个关键帧之间分 1 步展示完，
         也就是说0% ~ 5%之间变化一次，5% ~ 10%变化一次，所以我们这样写才能达到想要的效果。
-        
         （3）连续移动雪碧图位置（移动端推荐）
-        跟第二种基本一致，只是切换雪碧图的位置过程换成了transform:translate3d()来实现，
-        不过要加多一层overflow: hidden;的容器包裹，这里我们以只定义初始和结束帧为例，
-        使用transform可以开启GPU加速，提高机器渲染效果，还能有效解决移动端帧动画抖动的问题。
-        
+            跟第二种基本一致，只是切换雪碧图的位置过程换成了transform:translate3d()来实现，
+            不过要加多一层overflow: hidden;的容器包裹，这里我们以只定义初始和结束帧为例，
+            使用transform可以开启GPU加速，提高机器渲染效果，还能有效解决移动端帧动画抖动的问题。
         <div class="sprite-wp">
             <div class="sprite"></div>
         </div>
-        
         .sprite-wp {
             width: 300px;
             height: 300px;
@@ -468,44 +459,40 @@ initial-scale = 屏幕的宽度 / 设计稿的宽度
             animation: frame 333ms steps(20) both infinite;
         }
         @keyframes frame {
-        	0% {transform: translate3d(0,0,0);}
+            0% {transform: translate3d(0,0,0);}
             100% {transform: translate3d(-6000px,0,0);}
         }
-        
-        3、JS帧动画
-        （1）通过JS来控制img的src属性切换（不推荐）
-        和上面CSS3帧动画里面切换元素background-image属性一样，会存在多个请求等问题，所以该方案我们不推荐，但是这是一种解决思路。
-        （2）通过JS来控制Canvas图像绘制
-        通过Canvas制作帧动画的原理是用drawImage方法将图片绘制到Canvas上，不断擦除和重绘就能得到我们想要的效果。
-        （3）通过JS来控制CSS属性值变化
-       这种方式和前面CSS3帧动画一样，有三种方式，
-       一种是通过JS切换元素背景图片地址background-image，
-       一种是通过JS切换元素背景图片定位background-position，
-       最后一种是通过JS移动元素transform:translate3d()，
-       第一种不做介绍，因为同样会存在多个请求等问题，不推荐使用，这里实现后面两种。
+    3、JS帧动画
+    （1）通过JS来控制img的src属性切换（不推荐）
+    和上面CSS3帧动画里面切换元素background-image属性一样，会存在多个请求等问题，所以该方案我们不推荐，但是这是一种解决思路。
+    （2）通过JS来控制Canvas图像绘制
+    通过Canvas制作帧动画的原理是用drawImage方法将图片绘制到Canvas上，不断擦除和重绘就能得到我们想要的效果。
+    （3）通过JS来控制CSS属性值变化
+    这种方式和前面CSS3帧动画一样，有三种方式，
+    一种是通过JS切换元素背景图片地址background-image，
+    一种是通过JS切换元素背景图片定位background-position，
+    最后一种是通过JS移动元素transform:translate3d()，
+    第一种不做介绍，因为同样会存在多个请求等问题，不推荐使用，这里实现后面两种。
        
-     除了css transform:translate3d() 方案，其他方案的FPS都能达到60FPS的流畅程度，但该方案的FPS也不是很低。
-     CPU占用率最低的方案是 css transform:translate3d() 方案。
-     GPU占用最低的方案是 JS Canvas 绘制方案。
-     CSS 方案没有脚本开销
-     Rendering 最少的是 css transform:translate3d() 方案。
-     Painting 最少的是 css transform:translate3d() 方案。
-     各方案内存占用区别不大。
-     结论：我们看到，在7个指标中，css transform:translate3d() 方案将其中的4个指标做到了最低，从这点看，我们完全有理由选择这种方案来实现CSS帧动画。
+    除了css transform:translate3d() 方案，其他方案的FPS都能达到60FPS的流畅程度，但该方案的FPS也不是很低。
+    CPU占用率最低的方案是 css transform:translate3d() 方案。
+    GPU占用最低的方案是 JS Canvas 绘制方案。
+    CSS 方案没有脚本开销
+    Rendering 最少的是 css transform:translate3d() 方案。
+    Painting 最少的是 css transform:translate3d() 方案。
+    各方案内存占用区别不大。
+    结论：我们看到，在7个指标中，css transform:translate3d() 方案将其中的4个指标做到了最低，从这点看，我们完全有理由选择这种方案来实现CSS帧动画。
       
     大量的粒子效果用Canvas绘制方案肯定要比DOM+CSS实现要好的，
     大量的CSS属性值变换，使用 transform 实现性能是要更好的。
     适配：移动端适配最好不用rem，因为rem的计算会造成小数四舍五入，造成一定的抖动效果，建议直接用px作为单位，同时辅助以scale（zoom）媒体查询进行适配。如果使用rem适配，试试使用transform的方案，抖动问题可以得到优化解决。
     
-    tips：使用 will-change 可以在元素属性真正发生变化之前提前做好对应准备
-    
-        
+    tips：使用 will-change 可以在元素属性真正发生变化之前提前做好对应准备    
 `
 
 ## CSS wiki
 `
     BFC IFC
-    
     Block Formatting Context 块级格式化上下文。
     BFC布局规则
     内部的Box会在垂直方向，一个接一个的放置
@@ -522,29 +509,21 @@ initial-scale = 屏幕的宽度 / 设计稿的宽度
     dispaly为block、inline-block、table-cell、table-caption、flex、inline-flex
     overflow不为visible（除非该值已经传播到视口，入html body会将overflow的值传播到视口，故此情况下，该属性不能建立BFC）
     
-    
     IFC
     Inline Formatting Context 内敛格式化上下文。
-    
     ifc是什么
     IFC的line box（线框高度由其包含行内元素中最高的实际高度计算而来（不受到竖直方向的padding/margin影响）
-    
-    
     img font-size: 0;
     适配
     居中
     css动画 js[setTimeout requestFrameAnimation] css[gpu] svg canvas serverWorker  性能最优: css3
     gpu几种方式      
     动画库 animate.css
-    
     视觉差效果是如何实现的?
     给背景图片添加background-attachment:fixed属性,
     将背景固定在窗口,在使用background-position:top center或0% 0%;
     后续可以通过js修改background-position的top值,
     实现背景图片跟随页面上下移动的效果
-    
-   
-   
 `
 ## 跨域解决
 
@@ -555,7 +534,7 @@ initial-scale = 屏幕的宽度 / 设计稿的宽度
     接口请求/使用代理跨域
     跨窗口操作DOM/设置document.domain
 `
-## HTTP/HTTPS/HTTP1/HTTP2 
+## HTTP/HTTPS/HTTP1/HTTP2
 `
 
 `

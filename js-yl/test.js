@@ -827,6 +827,32 @@ var objGetProperty = {
 /***********************  getProperty(obj, 'a.b.c') END **********************/
 
 /*********************** 比较两个对象是否相等 START ***************************/
+function deepDiff(obj1, obj2) {
+   let key1 =  Object.keys(obj1).length;
+   let key2 =  Object.keys(obj2).length;
+   if(key1.length === key2.length) {
+       for (let key in obj1) {
+           if(obj1[key] !== obj2[key]) {
+               return false;
+           }
+           // value为引用类型
+           if(typeof obj1[key]==='object' && typeof obj2[key] === 'object') {
+               let equal = deepDiff(obj1[key], obj2[key]);
+               if(!equal){
+                   return false;
+               }
+           }
+           // value为基本数据类型
+           if(typeof obj1[key] !== 'object' && typeof obj2[obj1] !== 'object' && obj1[key] !== obj2[key]){
+               return false;
+           }
+       }
+
+   } else {
+       return false;
+   }
+   return true;
+}
 
 /*********************** 比较两个对象是否相等 END ***************************/
 
