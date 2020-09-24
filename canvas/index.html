@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #app {
+            margin-top: 10px;
+            /*border: 1px solid #b9429f;*/
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <button>画笔</button>
+    <button>文本</button>
+    <button>生成图片</button>
+</div>
+<canvas id="app" width="500" height="500">
+
+</canvas>
+
+<script>
+    window.onload = function () {
+        let app = document.querySelector('#app');
+        var ctx = app.getContext('2d');
+
+    };
+</script>
+
+</body>
+</html>

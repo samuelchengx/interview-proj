@@ -2,19 +2,15 @@
 function isArray1(value) {
     return Array.isArray(value);
 }
-
 function isArray2(value) {
     return Object.prototype.toString.call(value) === '[object array]';
 }
-
 function isArray3(value){
     return value instanceof Array
 }
-
 /**
  * 1.提问Object.prototype.toString.call为什么不是Array.prototype.toString.call
  */
-
 // 2.实现一个方法add(1)(2)(3);
 /**
  *
@@ -44,5 +40,4 @@ function add2(...arg) {
   }
   return _add;
 }
-
 console.log(add2(1)(2)(3)());
